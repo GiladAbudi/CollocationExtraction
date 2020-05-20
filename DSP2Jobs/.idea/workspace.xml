@@ -6,7 +6,30 @@
     </artifacts-to-build>
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="327488d4-7eac-4c97-ae4f-9e8ae45daebc" name="Default Changelist" comment="" />
+    <list default="true" id="327488d4-7eac-4c97-ae4f-9e8ae45daebc" name="Default Changelist" comment="">
+      <change afterPath="$PROJECT_DIR$/.idea/uiDesigner.xml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/.idea/vcs.xml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/java/Jobs/DoubleInputStep3.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/java/Jobs/DoubleWordStep2.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/../.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/misc.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/misc.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/artifacts/DSP2Jobs_jar/count.jar" beforeDir="false" afterPath="$PROJECT_DIR$/out/artifacts/DSP2Jobs_jar/count.jar" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/Jobs/CountWords.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/Jobs/SingleWordsStep1.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/Jobs/MainPipeline.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/Jobs/MainPipeline.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/Jobs/CountWords$MapperClass.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/Jobs/CountWords$PartitionerClass.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/Jobs/CountWords$ReducerClass.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/Jobs/CountWords.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/Jobs/MainPipeline.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/Jobs/MainPipeline.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../src/main/java/JobsRunner/RunJobs.java" beforeDir="false" afterPath="$PROJECT_DIR$/../src/main/java/JobsRunner/RunJobs.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../target/classes/Jobs/CountWords$MapperClass.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../target/classes/Jobs/CountWords$PartitionerClass.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../target/classes/Jobs/CountWords$ReducerClass.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../target/classes/Jobs/CountWords.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../target/classes/Jobs/MainPipeline.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../target/classes/JobsRunner/RunJobs.class" beforeDir="false" afterPath="$PROJECT_DIR$/../target/classes/JobsRunner/RunJobs.class" afterDir="false" />
+    </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
     <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
@@ -19,7 +42,11 @@
       </list>
     </option>
   </component>
+  <component name="Git.Settings">
+    <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$/.." />
+  </component>
   <component name="ProjectId" id="1c5KrnaBI3bcNxKxIS5oe2OAqjH" />
+  <component name="ProjectLevelVcsManager" settingsEditedManually="true" />
   <component name="ProjectViewState">
     <option name="hideEmptyMiddlePackages" value="true" />
     <option name="showExcludedFiles" value="true" />
@@ -27,9 +54,10 @@
   </component>
   <component name="PropertiesComponent">
     <property name="RunOnceActivity.ShowReadmeOnStart" value="true" />
+    <property name="SHARE_PROJECT_CONFIGURATION_FILES" value="true" />
     <property name="WebServerToolWindowFactoryState" value="false" />
     <property name="aspect.path.notification.shown" value="true" />
-    <property name="last_opened_file_path" value="$PROJECT_DIR$/src/main/java/Jobs" />
+    <property name="last_opened_file_path" value="$PROJECT_DIR$" />
     <property name="nodejs_interpreter_path.stuck_in_default_project" value="undefined stuck path" />
     <property name="project.structure.last.edited" value="Artifacts" />
     <property name="project.structure.proportion" value="0.15429688" />
@@ -51,8 +79,22 @@
         <option name="Make" enabled="true" />
       </method>
     </configuration>
+    <configuration name="SingleWordsStep1" type="Application" factoryName="Application" temporary="true" nameIsGenerated="true">
+      <option name="MAIN_CLASS_NAME" value="Jobs.SingleWordsStep1" />
+      <module name="DSP2Jobs" />
+      <extension name="coverage">
+        <pattern>
+          <option name="PATTERN" value="Jobs.*" />
+          <option name="ENABLED" value="true" />
+        </pattern>
+      </extension>
+      <method v="2">
+        <option name="Make" enabled="true" />
+      </method>
+    </configuration>
     <recent_temporary>
       <list>
+        <item itemvalue="Application.SingleWordsStep1" />
         <item itemvalue="Application.MainPipeline" />
       </list>
     </recent_temporary>
@@ -81,6 +123,7 @@
       <updated>1589813216347</updated>
       <workItem from="1589813219611" duration="3512000" />
       <workItem from="1589893529705" duration="5180000" />
+      <workItem from="1589962669629" duration="17596000" />
     </task>
     <servers />
   </component>
@@ -92,6 +135,10 @@
       <screen x="0" y="0" width="1536" height="826" />
     </state>
     <state x="223" y="67" key="#com.intellij.execution.impl.EditConfigurationsDialog/0.0.1536.826@0.0.1536.826" timestamp="1589813394419" />
+    <state x="574" y="122" key="#com.intellij.ide.util.MemberChooser" timestamp="1589988871756">
+      <screen x="0" y="0" width="1536" height="826" />
+    </state>
+    <state x="574" y="122" key="#com.intellij.ide.util.MemberChooser/0.0.1536.826@0.0.1536.826" timestamp="1589988871756" />
     <state x="499" y="196" key="#com.intellij.ide.util.TreeClassChooserDialog" timestamp="1589893651603">
       <screen x="0" y="0" width="1536" height="826" />
     </state>
@@ -100,25 +147,29 @@
       <screen x="0" y="0" width="1536" height="826" />
     </state>
     <state x="549" y="167" key="FileChooserDialogImpl/0.0.1536.826@0.0.1536.826" timestamp="1589893656258" />
-    <state width="1492" height="206" key="GridCell.Tab.0.bottom" timestamp="1589880741887">
+    <state width="1492" height="206" key="GridCell.Tab.0.bottom" timestamp="1589974221371">
       <screen x="0" y="0" width="1536" height="826" />
     </state>
-    <state width="1492" height="206" key="GridCell.Tab.0.bottom/0.0.1536.826@0.0.1536.826" timestamp="1589880741887" />
-    <state width="1492" height="206" key="GridCell.Tab.0.center" timestamp="1589880741887">
+    <state width="1492" height="206" key="GridCell.Tab.0.bottom/0.0.1536.826@0.0.1536.826" timestamp="1589974221371" />
+    <state width="1492" height="206" key="GridCell.Tab.0.center" timestamp="1589974221371">
       <screen x="0" y="0" width="1536" height="826" />
     </state>
-    <state width="1492" height="206" key="GridCell.Tab.0.center/0.0.1536.826@0.0.1536.826" timestamp="1589880741887" />
-    <state width="1492" height="206" key="GridCell.Tab.0.left" timestamp="1589880741887">
+    <state width="1492" height="206" key="GridCell.Tab.0.center/0.0.1536.826@0.0.1536.826" timestamp="1589974221371" />
+    <state width="1492" height="206" key="GridCell.Tab.0.left" timestamp="1589974221371">
       <screen x="0" y="0" width="1536" height="826" />
     </state>
-    <state width="1492" height="206" key="GridCell.Tab.0.left/0.0.1536.826@0.0.1536.826" timestamp="1589880741887" />
-    <state width="1492" height="206" key="GridCell.Tab.0.right" timestamp="1589880741887">
+    <state width="1492" height="206" key="GridCell.Tab.0.left/0.0.1536.826@0.0.1536.826" timestamp="1589974221371" />
+    <state width="1492" height="206" key="GridCell.Tab.0.right" timestamp="1589974221371">
       <screen x="0" y="0" width="1536" height="826" />
     </state>
-    <state width="1492" height="206" key="GridCell.Tab.0.right/0.0.1536.826@0.0.1536.826" timestamp="1589880741887" />
+    <state width="1492" height="206" key="GridCell.Tab.0.right/0.0.1536.826@0.0.1536.826" timestamp="1589974221371" />
     <state x="249" y="0" key="SettingsEditor" timestamp="1589893660660">
       <screen x="0" y="0" width="1536" height="826" />
     </state>
     <state x="249" y="0" key="SettingsEditor/0.0.1536.826@0.0.1536.826" timestamp="1589893660660" />
+    <state x="431" y="147" width="672" height="678" key="search.everywhere.popup" timestamp="1589965111064">
+      <screen x="0" y="0" width="1536" height="826" />
+    </state>
+    <state x="431" y="147" width="672" height="678" key="search.everywhere.popup/0.0.1536.826@0.0.1536.826" timestamp="1589965111064" />
   </component>
 </project>

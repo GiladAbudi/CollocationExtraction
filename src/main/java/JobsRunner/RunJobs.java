@@ -1,14 +1,13 @@
 package JobsRunner;
 
-import com.amazonaws.auth.AWSCredentials;
-import com.amazonaws.auth.PropertiesCredentials;
 import com.amazonaws.regions.Regions;
 import com.amazonaws.services.ec2.model.InstanceType;
 import com.amazonaws.services.elasticmapreduce.AmazonElasticMapReduce;
 import com.amazonaws.services.elasticmapreduce.AmazonElasticMapReduceClient;
 import com.amazonaws.services.elasticmapreduce.model.*;
 import org.apache.log4j.BasicConfigurator;
-
+// english 1 gram "s3://datasets.elasticmapreduce/ngrams/books/20090715/eng-us-all/1gram/data"
+// hebrew 1-gram "s3://datasets.elasticmapreduce/ngrams/books/20090715/heb-all/1gram/data"
 public class RunJobs {
     public static void main(String[] args) {
         BasicConfigurator.configure();
@@ -18,7 +17,10 @@ public class RunJobs {
 
         HadoopJarStepConfig hadoopJarStep = new HadoopJarStepConfig()
                 .withJar("s3n://countwords192/count.jar") // This should be a full map reduce application.
-                .withMainClass("Jobs.MainPipeline");
+                .withMainClass("Jobs.MainPipeline")
+                .withArgs("s3://datasets.elasticmapreduce/ngrams/books/20090715/heb-all/1gram/data",
+                        "s3://datasets.elasticmapreduce/ngrams/books/20090715/heb-all/2gram/data",
+                        "s3://countwords192/output/countOutput1/");
 
         StepConfig stepConfig = new StepConfig()
                 .withName("stepname")
