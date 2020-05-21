@@ -7,28 +7,14 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="92e6f8db-f94a-4573-83b3-820dfecd5c94" name="Default Changelist" comment="">
-      <change afterPath="$PROJECT_DIR$/DSP2Jobs/.idea/uiDesigner.xml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/DSP2Jobs/.idea/vcs.xml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/DSP2Jobs/src/main/java/Jobs/DoubleInputStep3.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/DSP2Jobs/src/main/java/Jobs/DoubleWordStep2.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/DSP2Jobs/.idea/misc.xml" beforeDir="false" afterPath="$PROJECT_DIR$/DSP2Jobs/.idea/misc.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/DSP2Jobs/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/DSP2Jobs/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/DSP2Jobs/out/artifacts/DSP2Jobs_jar/count.jar" beforeDir="false" afterPath="$PROJECT_DIR$/DSP2Jobs/out/artifacts/DSP2Jobs_jar/count.jar" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/DSP2Jobs/src/main/java/Jobs/CountWords.java" beforeDir="false" afterPath="$PROJECT_DIR$/DSP2Jobs/src/main/java/Jobs/SingleWordsStep1.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/DSP2Jobs/src/main/java/Jobs/MainPipeline.java" beforeDir="false" afterPath="$PROJECT_DIR$/DSP2Jobs/src/main/java/Jobs/MainPipeline.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/DSP2Jobs/target/classes/Jobs/CountWords$MapperClass.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/DSP2Jobs/target/classes/Jobs/CountWords$PartitionerClass.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/DSP2Jobs/target/classes/Jobs/CountWords$ReducerClass.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/DSP2Jobs/target/classes/Jobs/CountWords.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/DSP2Jobs/src/main/java/Jobs/SingleWordsStep1.java" beforeDir="false" afterPath="$PROJECT_DIR$/DSP2Jobs/src/main/java/Jobs/SingleWordsStep1.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/DSP2Jobs/target/classes/Jobs/MainPipeline.class" beforeDir="false" afterPath="$PROJECT_DIR$/DSP2Jobs/target/classes/Jobs/MainPipeline.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/JobsRunner/RunJobs.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/JobsRunner/RunJobs.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/classes/Jobs/CountWords$MapperClass.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/classes/Jobs/CountWords$PartitionerClass.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/classes/Jobs/CountWords$ReducerClass.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/classes/Jobs/CountWords.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/classes/Jobs/MainPipeline.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/classes/JobsRunner/RunJobs.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/JobsRunner/RunJobs.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/DSP2Jobs/target/classes/Jobs/SingleWordsStep1$MapperClass.class" beforeDir="false" afterPath="$PROJECT_DIR$/DSP2Jobs/target/classes/Jobs/SingleWordsStep1$MapperClass.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/DSP2Jobs/target/classes/Jobs/SingleWordsStep1$ReducerClass.class" beforeDir="false" afterPath="$PROJECT_DIR$/DSP2Jobs/target/classes/Jobs/SingleWordsStep1$ReducerClass.class" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -149,7 +135,7 @@
       <updated>1589729457740</updated>
       <workItem from="1589729462965" duration="24539000" />
       <workItem from="1589881700389" duration="7221000" />
-      <workItem from="1589913706695" duration="6213000" />
+      <workItem from="1589913706695" duration="9882000" />
     </task>
     <servers />
   </component>
@@ -177,22 +163,22 @@
       <screen x="0" y="0" width="1536" height="826" />
     </state>
     <state x="549" y="167" key="FileChooserDialogImpl/0.0.1536.826@0.0.1536.826" timestamp="1589962591802" />
-    <state width="1492" height="226" key="GridCell.Tab.0.bottom" timestamp="1589997806958">
+    <state width="1492" height="226" key="GridCell.Tab.0.bottom" timestamp="1590001693604">
       <screen x="0" y="0" width="1536" height="826" />
     </state>
-    <state width="1492" height="226" key="GridCell.Tab.0.bottom/0.0.1536.826@0.0.1536.826" timestamp="1589997806958" />
-    <state width="1492" height="226" key="GridCell.Tab.0.center" timestamp="1589997806958">
+    <state width="1492" height="226" key="GridCell.Tab.0.bottom/0.0.1536.826@0.0.1536.826" timestamp="1590001693604" />
+    <state width="1492" height="226" key="GridCell.Tab.0.center" timestamp="1590001693604">
       <screen x="0" y="0" width="1536" height="826" />
     </state>
-    <state width="1492" height="226" key="GridCell.Tab.0.center/0.0.1536.826@0.0.1536.826" timestamp="1589997806958" />
-    <state width="1492" height="226" key="GridCell.Tab.0.left" timestamp="1589997806958">
+    <state width="1492" height="226" key="GridCell.Tab.0.center/0.0.1536.826@0.0.1536.826" timestamp="1590001693604" />
+    <state width="1492" height="226" key="GridCell.Tab.0.left" timestamp="1590001693603">
       <screen x="0" y="0" width="1536" height="826" />
     </state>
-    <state width="1492" height="226" key="GridCell.Tab.0.left/0.0.1536.826@0.0.1536.826" timestamp="1589997806958" />
-    <state width="1492" height="226" key="GridCell.Tab.0.right" timestamp="1589997806958">
+    <state width="1492" height="226" key="GridCell.Tab.0.left/0.0.1536.826@0.0.1536.826" timestamp="1590001693603" />
+    <state width="1492" height="226" key="GridCell.Tab.0.right" timestamp="1590001693604">
       <screen x="0" y="0" width="1536" height="826" />
     </state>
-    <state width="1492" height="226" key="GridCell.Tab.0.right/0.0.1536.826@0.0.1536.826" timestamp="1589997806958" />
+    <state width="1492" height="226" key="GridCell.Tab.0.right/0.0.1536.826@0.0.1536.826" timestamp="1590001693604" />
     <state width="1492" height="256" key="GridCell.Tab.1.bottom" timestamp="1589807865142">
       <screen x="0" y="0" width="1536" height="826" />
     </state>

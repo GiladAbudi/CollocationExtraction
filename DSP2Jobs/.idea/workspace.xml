@@ -7,28 +7,14 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="327488d4-7eac-4c97-ae4f-9e8ae45daebc" name="Default Changelist" comment="">
-      <change afterPath="$PROJECT_DIR$/.idea/uiDesigner.xml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/.idea/vcs.xml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/java/Jobs/DoubleInputStep3.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/java/Jobs/DoubleWordStep2.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/../.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/../.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/misc.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/misc.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/out/artifacts/DSP2Jobs_jar/count.jar" beforeDir="false" afterPath="$PROJECT_DIR$/out/artifacts/DSP2Jobs_jar/count.jar" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/Jobs/CountWords.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/Jobs/SingleWordsStep1.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/Jobs/MainPipeline.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/Jobs/MainPipeline.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/classes/Jobs/CountWords$MapperClass.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/classes/Jobs/CountWords$PartitionerClass.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/classes/Jobs/CountWords$ReducerClass.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/classes/Jobs/CountWords.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/Jobs/SingleWordsStep1.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/Jobs/SingleWordsStep1.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/target/classes/Jobs/MainPipeline.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/Jobs/MainPipeline.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../src/main/java/JobsRunner/RunJobs.java" beforeDir="false" afterPath="$PROJECT_DIR$/../src/main/java/JobsRunner/RunJobs.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../target/classes/Jobs/CountWords$MapperClass.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/../target/classes/Jobs/CountWords$PartitionerClass.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/../target/classes/Jobs/CountWords$ReducerClass.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/../target/classes/Jobs/CountWords.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/../target/classes/Jobs/MainPipeline.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/../target/classes/JobsRunner/RunJobs.class" beforeDir="false" afterPath="$PROJECT_DIR$/../target/classes/JobsRunner/RunJobs.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/Jobs/SingleWordsStep1$MapperClass.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/Jobs/SingleWordsStep1$MapperClass.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/Jobs/SingleWordsStep1$ReducerClass.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/Jobs/SingleWordsStep1$ReducerClass.class" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -123,7 +109,7 @@
       <updated>1589813216347</updated>
       <workItem from="1589813219611" duration="3512000" />
       <workItem from="1589893529705" duration="5180000" />
-      <workItem from="1589962669629" duration="17596000" />
+      <workItem from="1589962669629" duration="20341000" />
     </task>
     <servers />
   </component>

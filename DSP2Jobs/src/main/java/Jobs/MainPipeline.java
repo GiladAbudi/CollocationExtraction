@@ -43,18 +43,18 @@ public class MainPipeline {
             "who", "whoever", "whole", "whom", "whose", "why", "will", "with", "within", "without", "would", "yet", "you", "your",
             "yours", "yourself", "yourselves"));
     public static void main(String[] args) throws Exception {
-        String path1Gram = args[0];
-        String path2Gram=args[1];
-        String outputPath = args[2];
+        String path1Gram = args[1];
+        String path2Gram=args[2];
+        String outputPath = args[3];
         Configuration conf1 = new Configuration();
         Job job = Job.getInstance(conf1,"Count");
         job.setJarByClass(SingleWordsStep1.class);
         job.setMapperClass(SingleWordsStep1.MapperClass.class);
         job.setPartitionerClass(SingleWordsStep1.PartitionerClass.class);
-        job.setCombinerClass(SingleWordsStep1.ReducerClass.class);
+//        job.setCombinerClass(SingleWordsStep1.ReducerClass.class);
         job.setReducerClass(SingleWordsStep1.ReducerClass.class);
         job.setMapOutputKeyClass(Text.class);
-        job.setMapOutputValueClass(LongWritable.class);
+        job.setMapOutputValueClass(Text.class);
         job.setOutputKeyClass(Text.class);
         job.setOutputValueClass(Text.class);
         FileInputFormat.addInputPath(job, new Path(path1Gram));
