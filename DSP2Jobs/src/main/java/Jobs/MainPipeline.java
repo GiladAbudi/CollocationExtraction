@@ -2,16 +2,16 @@ package Jobs;
 
 import org.apache.hadoop.conf.Configuration;
 import org.apache.hadoop.fs.Path;
-import org.apache.hadoop.io.LongWritable;
 import org.apache.hadoop.io.Text;
 import org.apache.hadoop.mapreduce.Job;
 import org.apache.hadoop.mapreduce.lib.input.FileInputFormat;
-import org.apache.hadoop.mapreduce.lib.input.SequenceFileInputFormat;
+import org.apache.hadoop.mapreduce.lib.input.MultipleInputs;
+import org.apache.hadoop.mapreduce.lib.input.TextInputFormat;
 import org.apache.hadoop.mapreduce.lib.output.FileOutputFormat;
 import org.apache.hadoop.mapreduce.lib.output.TextOutputFormat;
 
-import java.time.LocalTime;
-import java.util.ArrayList;
+
+import java.time.LocalDateTime;
 import java.util.Arrays;
 import java.util.HashSet;
 
@@ -43,26 +43,55 @@ public class MainPipeline {
             "who", "whoever", "whole", "whom", "whose", "why", "will", "with", "within", "without", "would", "yet", "you", "your",
             "yours", "yourself", "yourselves"));
     public static void main(String[] args) throws Exception {
+        // ------------------------- Step 1 -----------------------
         String path1Gram = args[1];
         String path2Gram=args[2];
         String outputPath = args[3];
+        String output1 = outputPath +"Step1Output"+ LocalDateTime.now()+" /";
         Configuration conf1 = new Configuration();
         Job job = Job.getInstance(conf1,"Count");
-        job.setJarByClass(SingleWordsStep1.class);
-        job.setMapperClass(SingleWordsStep1.MapperClass.class);
-        job.setPartitionerClass(SingleWordsStep1.PartitionerClass.class);
-//        job.setCombinerClass(SingleWordsStep1.ReducerClass.class);
-        job.setReducerClass(SingleWordsStep1.ReducerClass.class);
+        MultipleInputs.addInputPath(job, new Path(path1Gram), TextInputFormat.class,
+                Step1Grams.MapperClass1Gram.class);
+        MultipleInputs.addInputPath(job, new Path(path2Gram), TextInputFormat.class,
+                Step1Grams.MapperClass2Gram.class);
+        job.setJarByClass(Step1Grams.class);
+        job.setPartitionerClass(Step1Grams.PartitionerClass.class);
+        job.setReducerClass(Step1Grams.ReducerClass.class);
         job.setMapOutputKeyClass(Text.class);
         job.setMapOutputValueClass(Text.class);
         job.setOutputKeyClass(Text.class);
         job.setOutputValueClass(Text.class);
-        FileInputFormat.addInputPath(job, new Path(path1Gram));
-        FileOutputFormat.setOutputPath(job, new Path(outputPath));
-        job.setInputFormatClass(SequenceFileInputFormat.class);
+        FileOutputFormat.setOutputPath(job, new Path(output1));
         job.setOutputFormatClass(TextOutputFormat.class);
-        System.exit(job.waitForCompletion(true) ? 0 : 1);
-        System.out.println("Step 1 finished");
+        if(job.waitForCompletion(true)) {
+            System.out.println("Step 1 finished");
+        }
+        else{
+            System.out.println("Step 1 failed ");
+        }
+//        // ------------------------- Step 2 -----------------------
+//        String output2 = outputPath+"Step2Output"+LocalDateTime.now()+" /";
+//        Configuration conf2 = new Configuration();
+//        job = Job.getInstance(conf2,"Arrange step1 output");
+//        job.setJarByClass(Step2Arrange.class);
+//        job.setMapperClass(Step2Arrange.MapperClassStep2.class);
+//        job.setPartitionerClass(Step2Arrange.PartitionerClass2.class);
+//        job.setReducerClass(Step2Arrange.ReducerClassStep2.class);
+//        job.setMapOutputKeyClass(Text.class);
+//        job.setMapOutputValueClass(Text.class);
+//        job.setOutputKeyClass(Text.class);
+//        job.setOutputValueClass(Text.class);
+//        FileInputFormat.addInputPath(job,new Path(output1));
+//        FileOutputFormat.setOutputPath(job, new Path(output2));
+//        job.setInputFormatClass(TextInputFormat.class);
+//        job.setOutputFormatClass(TextOutputFormat.class);
+//        if(job.waitForCompletion(true)) {
+//            System.out.println("Step 2 finished");
+//        }
+//        else{
+//            System.out.println("Step 2 failed ");
+//        }
+
     }
 
 }

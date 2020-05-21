@@ -7,14 +7,21 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="327488d4-7eac-4c97-ae4f-9e8ae45daebc" name="Default Changelist" comment="">
+      <change afterPath="$PROJECT_DIR$/src/main/java/Jobs/Step1Grams.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/../.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/../.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/artifacts/DSP2Jobs_jar/count.jar" beforeDir="false" afterPath="$PROJECT_DIR$/out/artifacts/DSP2Jobs_jar/count.jar" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/artifacts/DSP2Jobs_jar/count.jar" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/Jobs/DoubleWordStep2.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/Jobs/Step2Arrange.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/Jobs/MainPipeline.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/Jobs/MainPipeline.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/Jobs/SingleWordsStep1.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/Jobs/SingleWordsStep1.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/Jobs/SingleWordsStep1.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/Jobs/DoubleWordStep2$MapperClass2Gram.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/Jobs/DoubleWordStep2$MapperClass2Gram.class" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/target/classes/Jobs/MainPipeline.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/Jobs/MainPipeline.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/classes/Jobs/SingleWordsStep1$MapperClass.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/Jobs/SingleWordsStep1$MapperClass.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/classes/Jobs/SingleWordsStep1$ReducerClass.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/Jobs/SingleWordsStep1$ReducerClass.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/Jobs/SingleWordsStep1$MapperClass.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/Jobs/SingleWordsStep1$PartitionerClass.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/Jobs/SingleWordsStep1$ReducerClass.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/Jobs/SingleWordsStep1.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../src/main/java/JobsRunner/RunJobs.java" beforeDir="false" afterPath="$PROJECT_DIR$/../src/main/java/JobsRunner/RunJobs.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../target/classes/JobsRunner/RunJobs.class" beforeDir="false" afterPath="$PROJECT_DIR$/../target/classes/JobsRunner/RunJobs.class" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -50,7 +57,7 @@
     <property name="project.structure.side.proportion" value="0.20574713" />
     <property name="settings.editor.selected.configurable" value="configurable.group.appearance" />
   </component>
-  <component name="RunManager">
+  <component name="RunManager" selected="Application.MainPipeline">
     <configuration name="MainPipeline" type="Application" factoryName="Application" temporary="true" nameIsGenerated="true">
       <option name="MAIN_CLASS_NAME" value="Jobs.MainPipeline" />
       <module name="DSP2Jobs" />
@@ -65,8 +72,8 @@
         <option name="Make" enabled="true" />
       </method>
     </configuration>
-    <configuration name="SingleWordsStep1" type="Application" factoryName="Application" temporary="true" nameIsGenerated="true">
-      <option name="MAIN_CLASS_NAME" value="Jobs.SingleWordsStep1" />
+    <configuration name="Step1Grams" type="Application" factoryName="Application" temporary="true" nameIsGenerated="true">
+      <option name="MAIN_CLASS_NAME" value="Jobs.Step1Grams" />
       <module name="DSP2Jobs" />
       <extension name="coverage">
         <pattern>
@@ -80,8 +87,8 @@
     </configuration>
     <recent_temporary>
       <list>
-        <item itemvalue="Application.SingleWordsStep1" />
         <item itemvalue="Application.MainPipeline" />
+        <item itemvalue="Application.Step1Grams" />
       </list>
     </recent_temporary>
   </component>
@@ -109,7 +116,7 @@
       <updated>1589813216347</updated>
       <workItem from="1589813219611" duration="3512000" />
       <workItem from="1589893529705" duration="5180000" />
-      <workItem from="1589962669629" duration="20341000" />
+      <workItem from="1589962669629" duration="27750000" />
     </task>
     <servers />
   </component>
@@ -133,26 +140,30 @@
       <screen x="0" y="0" width="1536" height="826" />
     </state>
     <state x="549" y="167" key="FileChooserDialogImpl/0.0.1536.826@0.0.1536.826" timestamp="1589893656258" />
-    <state width="1492" height="206" key="GridCell.Tab.0.bottom" timestamp="1589974221371">
+    <state width="1492" height="206" key="GridCell.Tab.0.bottom" timestamp="1590058332430">
       <screen x="0" y="0" width="1536" height="826" />
     </state>
-    <state width="1492" height="206" key="GridCell.Tab.0.bottom/0.0.1536.826@0.0.1536.826" timestamp="1589974221371" />
-    <state width="1492" height="206" key="GridCell.Tab.0.center" timestamp="1589974221371">
+    <state width="1492" height="206" key="GridCell.Tab.0.bottom/0.0.1536.826@0.0.1536.826" timestamp="1590058332430" />
+    <state width="1492" height="206" key="GridCell.Tab.0.center" timestamp="1590058332430">
       <screen x="0" y="0" width="1536" height="826" />
     </state>
-    <state width="1492" height="206" key="GridCell.Tab.0.center/0.0.1536.826@0.0.1536.826" timestamp="1589974221371" />
-    <state width="1492" height="206" key="GridCell.Tab.0.left" timestamp="1589974221371">
+    <state width="1492" height="206" key="GridCell.Tab.0.center/0.0.1536.826@0.0.1536.826" timestamp="1590058332430" />
+    <state width="1492" height="206" key="GridCell.Tab.0.left" timestamp="1590058332430">
       <screen x="0" y="0" width="1536" height="826" />
     </state>
-    <state width="1492" height="206" key="GridCell.Tab.0.left/0.0.1536.826@0.0.1536.826" timestamp="1589974221371" />
-    <state width="1492" height="206" key="GridCell.Tab.0.right" timestamp="1589974221371">
+    <state width="1492" height="206" key="GridCell.Tab.0.left/0.0.1536.826@0.0.1536.826" timestamp="1590058332430" />
+    <state width="1492" height="206" key="GridCell.Tab.0.right" timestamp="1590058332430">
       <screen x="0" y="0" width="1536" height="826" />
     </state>
-    <state width="1492" height="206" key="GridCell.Tab.0.right/0.0.1536.826@0.0.1536.826" timestamp="1589974221371" />
+    <state width="1492" height="206" key="GridCell.Tab.0.right/0.0.1536.826@0.0.1536.826" timestamp="1590058332430" />
     <state x="249" y="0" key="SettingsEditor" timestamp="1589893660660">
       <screen x="0" y="0" width="1536" height="826" />
     </state>
     <state x="249" y="0" key="SettingsEditor/0.0.1536.826@0.0.1536.826" timestamp="1589893660660" />
+    <state x="425" y="182" key="run.anything.popup" timestamp="1590070244238">
+      <screen x="0" y="0" width="1536" height="826" />
+    </state>
+    <state x="425" y="182" key="run.anything.popup/0.0.1536.826@0.0.1536.826" timestamp="1590070244238" />
     <state x="431" y="147" width="672" height="678" key="search.everywhere.popup" timestamp="1589965111064">
       <screen x="0" y="0" width="1536" height="826" />
     </state>

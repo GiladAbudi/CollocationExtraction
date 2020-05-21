@@ -6,6 +6,9 @@ import com.amazonaws.services.elasticmapreduce.AmazonElasticMapReduce;
 import com.amazonaws.services.elasticmapreduce.AmazonElasticMapReduceClient;
 import com.amazonaws.services.elasticmapreduce.model.*;
 import org.apache.log4j.BasicConfigurator;
+
+import java.time.LocalDateTime;
+
 // english 1 gram "s3://datasets.elasticmapreduce/ngrams/books/20090715/eng-us-all/1gram/data"
 // hebrew 1-gram "s3://datasets.elasticmapreduce/ngrams/books/20090715/heb-all/1gram/data"
 public class RunJobs {
@@ -16,11 +19,11 @@ public class RunJobs {
                 .build();
 
         HadoopJarStepConfig hadoopJarStep = new HadoopJarStepConfig()
-                .withJar("s3n://countwords192/count.jar") // This should be a full map reduce application.
+                .withJar("s3n://countwords192/DSP2Jobs.jar") // This should be a full map reduce application.
                 .withMainClass("Jobs.MainPipeline")
-                .withArgs("s3://datasets.elasticmapreduce/ngrams/books/20090715/heb-all/1gram/data",
-                        "s3://datasets.elasticmapreduce/ngrams/books/20090715/heb-all/2gram/data",
-                        "s3://countwords192/output/countOutput1/");
+                .withArgs("s3://countwords192/googlebooks-eng-all-1gram-20120701-z",
+                        "s3://countwords192/googlebooks-eng-all-2gram-20120701-za",
+                        "s3://countwords192/output/");
 
         StepConfig stepConfig = new StepConfig()
                 .withName("stepname")
