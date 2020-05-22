@@ -29,9 +29,9 @@ public class Step3FinalFormat {
     public static class ReducerStep3 extends Reducer<Text, Text, Text, Text> {
         @Override
         public void setup(Context context) throws IOException, InterruptedException {
+
             Configuration c = context.getConfiguration();
             String data = c.get("COUNTER_N1");
-
             String[] counterDecade = data.split("\n");
             for (String decade_counter : counterDecade) {
                 String[] dec_val = decade_counter.split(" ");// [decade,N]
@@ -81,10 +81,10 @@ public class Step3FinalFormat {
 
     }
 
-    public static class PartitionerClass3 extends Partitioner<Text, IntWritable> {
+    public static class PartitionerClass3 extends Partitioner<Text, Text> {
         @Override
-        public int getPartition(Text key, IntWritable value, int numPartitions) {
-            return key.hashCode() % numPartitions;
+        public int getPartition(Text key, Text value, int numPartitions) {
+            return (key.hashCode() & Integer.MAX_VALUE) % numPartitions;
         }
     }
 

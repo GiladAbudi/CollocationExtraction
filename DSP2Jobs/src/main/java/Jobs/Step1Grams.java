@@ -25,6 +25,7 @@ public class Step1Grams {
             String[] splitted = line.toString().split("\t");
             Text key = new Text(splitted[0]+" "+getDecade(splitted[1]));
             System.out.println("key = " + key);
+
             if(!MainPipeline.stopWords.contains(splitted[0])) {
                 context.write(key, new Text(splitted[2])); // <word decade, occur>
             }
@@ -40,6 +41,7 @@ public class Step1Grams {
             String[] bigram = splitted[0].split(" ");
             Text key = new Text(bigram[0]+" " +bigram[1] +" "+getDecade(splitted[1]));
             System.out.println("key = " + key);
+
             if(!MainPipeline.stopWords.contains(bigram[0]) && !MainPipeline.stopWords.contains(bigram[1])) {
                 context.write(key, new Text(splitted[2]));
             }
@@ -75,10 +77,10 @@ public class Step1Grams {
         }
     }
 
-    public static class PartitionerClass extends Partitioner<Text, IntWritable> {
+    public static class PartitionerClass extends Partitioner<Text, Text> {
         @Override
-        public int getPartition(Text key, IntWritable value, int numPartitions) {
-            return key.hashCode() % numPartitions;
+        public int getPartition(Text key, Text value, int numPartitions) {
+            return (key.hashCode() & Integer.MAX_VALUE) % numPartitions;
         }
     }
 

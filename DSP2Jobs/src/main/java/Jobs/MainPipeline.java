@@ -93,8 +93,8 @@ public class MainPipeline {
 
         String output3 = outputPath+"Step3Output" + time+ "/";
         Configuration conf3 = new Configuration();
-        Job job3 = Job.getInstance(conf3,"Step 3 - compute log");
         conf3.set("COUNTER_N1",data);// for gram-1
+        Job job3 = Job.getInstance(conf3,"Step 3 - compute log");
         job3.setJarByClass(Step3FinalFormat.class);
         job3.setMapperClass(Step3FinalFormat.MapperStep3.class);
         job3.setPartitionerClass(Step3FinalFormat.PartitionerClass3.class);
