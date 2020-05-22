@@ -56,7 +56,7 @@ public class Step1Grams {
                 for (Text value : values) {
                     sum += Long.parseLong(value.toString());
                 }
-                context.write(key,new Text(" "+sum)); // <word decade,occurrences>
+                context.write(key,new Text(""+sum)); // <word decade,occurrences>
             }
             else{
                 System.out.println("key = " + key.toString());
@@ -71,13 +71,6 @@ public class Step1Grams {
                 context.write(new Text(w2+" " +decade),key);
                 context.write(key,new Text(""+sum));
             }
-
-//            System.out.println("CHECK REDUCER");
-//            long sum = 0;
-//            for (Text value : values) {
-//                sum += Long.parseLong(value.toString());
-//            }
-//            context.write(key,new Text(" "+sum)); // <word decade,occurrences>
         }
     }
 

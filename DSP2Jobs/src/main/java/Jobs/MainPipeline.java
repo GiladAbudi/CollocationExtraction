@@ -11,6 +11,7 @@ import org.apache.hadoop.mapreduce.lib.output.FileOutputFormat;
 import org.apache.hadoop.mapreduce.lib.output.TextOutputFormat;
 
 
+import java.io.IOException;
 import java.time.LocalDateTime;
 import java.util.Arrays;
 import java.util.HashSet;
@@ -45,9 +46,10 @@ public class MainPipeline {
     public static void main(String[] args) throws Exception {
         // ------------------------- Step 1 -----------------------
         String path1Gram = args[1];
-        String path2Gram=args[2];
+        String path2Gram = args[2];
         String outputPath = args[3];
-        String output1 = outputPath +"Step1Output"+ LocalDateTime.now()+" /";
+        String time = LocalDateTime.now().toString().replace(':','-');
+        String output1 = outputPath + "Step1Output"+time+"/";
         Configuration conf1 = new Configuration();
         Job job = Job.getInstance(conf1,"Count");
         MultipleInputs.addInputPath(job, new Path(path1Gram), TextInputFormat.class,
@@ -69,29 +71,48 @@ public class MainPipeline {
         else{
             System.out.println("Step 1 failed ");
         }
-//        // ------------------------- Step 2 -----------------------
-//        String output2 = outputPath+"Step2Output"+LocalDateTime.now()+" /";
-//        Configuration conf2 = new Configuration();
-//        job = Job.getInstance(conf2,"Arrange step1 output");
-//        job.setJarByClass(Step2Arrange.class);
-//        job.setMapperClass(Step2Arrange.MapperClassStep2.class);
-//        job.setPartitionerClass(Step2Arrange.PartitionerClass2.class);
-//        job.setReducerClass(Step2Arrange.ReducerClassStep2.class);
-//        job.setMapOutputKeyClass(Text.class);
-//        job.setMapOutputValueClass(Text.class);
-//        job.setOutputKeyClass(Text.class);
-//        job.setOutputValueClass(Text.class);
-//        FileInputFormat.addInputPath(job,new Path(output1));
-//        FileOutputFormat.setOutputPath(job, new Path(output2));
-//        job.setInputFormatClass(TextInputFormat.class);
-//        job.setOutputFormatClass(TextOutputFormat.class);
-//        if(job.waitForCompletion(true)) {
-//            System.out.println("Step 2 finished");
-//        }
-//        else{
-//            System.out.println("Step 2 failed ");
-//        }
+        // ------------------------- Step 2 -----------------------
+        String output2 = outputPath+"Step2Output" + time+ "/";
+        Configuration conf2 = new Configuration();
+        job = Job.getInstance(conf2,"Step 2 - arrange keys");
+        job.setJarByClass(Step2Arrange.class);
+        job.setMapperClass(Step2Arrange.MapperClassStep2.class);
+        job.setPartitionerClass(Step2Arrange.PartitionerClass2.class);
+        job.setReducerClass(Step2Arrange.ReducerClassStep2.class);
+        setJob(job,output1, output2);
+        if(job.waitForCompletion(true)) {
+            System.out.println("Step 2 finished");
+        }
+        else{
+            System.out.println("Step 2 failed ");
+        }
 
+        String output3 = outputPath+"Step3Output" + time+ "/";
+        Configuration conf3 = new Configuration();
+        job = Job.getInstance(conf3,"Step 3 - compute log");
+        job.setJarByClass(Step3FinalFormat.class);
+        job.setMapperClass(Step3FinalFormat.MapperStep3.class);
+        job.setPartitionerClass(Step3FinalFormat.PartitionerClass3.class);
+        job.setReducerClass(Step3FinalFormat.ReducerStep3.class);
+        setJob(job,output2, output3);
+        if(job.waitForCompletion(true)) {
+            System.out.println("Step 3 finished");
+        }
+        else{
+            System.out.println("Step 3 failed ");
+        }
+
+    }
+
+    private static void setJob(Job job,String inputPath, String outputPath) throws IOException {
+        job.setMapOutputKeyClass(Text.class);
+        job.setMapOutputValueClass(Text.class);
+        job.setOutputKeyClass(Text.class);
+        job.setOutputValueClass(Text.class);
+        FileInputFormat.addInputPath(job,new Path(inputPath));
+        FileOutputFormat.setOutputPath(job, new Path(outputPath));
+        job.setInputFormatClass(TextInputFormat.class);
+        job.setOutputFormatClass(TextOutputFormat.class);
     }
 
 }

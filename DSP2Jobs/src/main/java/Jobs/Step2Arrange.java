@@ -8,6 +8,7 @@ import org.apache.hadoop.mapreduce.Partitioner;
 import org.apache.hadoop.mapreduce.Reducer;
 
 import java.io.IOException;
+import java.util.ArrayList;
 
 import static Jobs.Step1Grams.getDecade;
 
@@ -27,41 +28,51 @@ public class Step2Arrange {
     public static class ReducerClassStep2 extends Reducer<Text,Text,Text,Text> {
         @Override
         public void reduce(Text key, Iterable<Text> values, Context context) throws IOException,  InterruptedException {
-            //if the key is of type <w1 w2 decade, cw1w2>, pass it forward
+            //if the key is of type <w1 w2 decade, cw1*w2>, pass it forward
             System.out.println("------------------------Joined Reducer ------------------");
             System.out.println("reducer working on this key: " +key);
             String[] keySplit = key.toString().split(" ");
             if(keySplit.length>2){
                 for(Text value: values){
                     context.write(key,value);
+                    System.out.println("reducer 2 wrote to context key: " +key+" value: " +value);
                 }
             }
             else{ //key is of type <w1 decade>
                 String w = keySplit[0];
-                String newKey = "";
-                String cw ="";
-                String wordNum="0";
+                System.out.println("This is w in reducer: " + w);
+                ArrayList<String> newKeys = new ArrayList<>();
+                String c1 ="";
+                ArrayList<String> wordindexes = new ArrayList<>();
                 for(Text value:values){
                     System.out.println("reducer curr value: "+value);
                     String[] valueSplit = value.toString().split(" ");
                     if(valueSplit.length>1){ //value of type w1 w2 decade
-                        newKey = value.toString();
-                        if(w.equals(valueSplit[0])){
-                            wordNum ="1";
+                        System.out.println("Value[0] = " + valueSplit[0]);
+                        System.out.println("Value[1] = "+ valueSplit[1] );
+
+                        if(w.equals(valueSplit[0])){ // checking which word of the current value matches to key (1 or 2)
+                            newKeys.add(value.toString());
+                            wordindexes.add("1");
                         }
                         else{
                             if(w.equals(valueSplit[1])) {
-                                wordNum = "2";
-                            }
-                            else{
-                                continue;
+                                newKeys.add(value.toString());
+                                wordindexes.add("2");
                             }
                         }
                     }else{ // value of type c1
-                        cw = "cw" +wordNum+" "+value.toString();
+                        c1 = value.toString();
                     }
-                    if(!newKey.isEmpty())
-                        context.write(new Text(newKey),new Text(cw));// write (w1 w2 decade, cw1/cw2)
+                }
+                if(!newKeys.isEmpty() && !c1.isEmpty()) {
+                    for(int i=0; i<newKeys.size(); i++){
+                        String newKey = newKeys.get(i);
+                        String wordIndex = wordindexes.get(i);
+                        String newValue = "cw" + wordIndex +" " +c1;
+                        context.write(new Text(newKey),new Text(newValue));// write (w1 w2 decade, cw1/cw2)
+                        System.out.println("Reducer 2 wrote to context key: " +newKey+ " value: " +newValue);
+                    }
                 }
 
             }

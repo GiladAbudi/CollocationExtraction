@@ -39,7 +39,7 @@ public class RunJobs {
                 .withPlacement(new PlacementType("us-east-1a"));
 
         RunJobFlowRequest runFlowRequest = new RunJobFlowRequest()
-                .withName("Count words 1-gram")
+                .withName("Collocation Extraction")
                 .withInstances(instances)
                 .withSteps(stepConfig)
                 .withServiceRole("EMR_DefaultRole")
