@@ -11,6 +11,9 @@ import java.time.LocalDateTime;
 
 // english 1 gram "s3://datasets.elasticmapreduce/ngrams/books/20090715/eng-us-all/1gram/data"
 // hebrew 1-gram "s3://datasets.elasticmapreduce/ngrams/books/20090715/heb-all/1gram/data"
+// english 2 gram "s3://datasets.elasticmapreduce/ngrams/books/20090715/eng-us-all/2gram/data"
+// hebrew 2-gram "s3://datasets.elasticmapreduce/ngrams/books/20090715/heb-all/2gram/data"
+
 public class RunJobs {
     public static void main(String[] args) {
         BasicConfigurator.configure();
@@ -31,7 +34,7 @@ public class RunJobs {
                 .withActionOnFailure("TERMINATE_JOB_FLOW");
 
         JobFlowInstancesConfig instances = new JobFlowInstancesConfig()
-                .withInstanceCount(2)
+                .withInstanceCount(7)
                 .withMasterInstanceType(InstanceType.M4Large.toString())
                 .withSlaveInstanceType(InstanceType.M4Large.toString())
                 .withHadoopVersion("2.7.2").withEc2KeyName("eilon")

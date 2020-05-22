@@ -56,6 +56,7 @@ public class Step1Grams {
                 for (Text value : values) {
                     sum += Long.parseLong(value.toString());
                 }
+                context.getCounter("COUNTER_N1",keySplit[1]).increment(sum);
                 context.write(key,new Text(""+sum)); // <word decade,occurrences>
             }
             else{

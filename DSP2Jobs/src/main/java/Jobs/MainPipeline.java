@@ -3,6 +3,9 @@ package Jobs;
 import org.apache.hadoop.conf.Configuration;
 import org.apache.hadoop.fs.Path;
 import org.apache.hadoop.io.Text;
+import org.apache.hadoop.mapreduce.Counter;
+import org.apache.hadoop.mapreduce.CounterGroup;
+import org.apache.hadoop.mapreduce.Counters;
 import org.apache.hadoop.mapreduce.Job;
 import org.apache.hadoop.mapreduce.lib.input.FileInputFormat;
 import org.apache.hadoop.mapreduce.lib.input.MultipleInputs;
@@ -51,36 +54,37 @@ public class MainPipeline {
         String time = LocalDateTime.now().toString().replace(':','-');
         String output1 = outputPath + "Step1Output"+time+"/";
         Configuration conf1 = new Configuration();
-        Job job = Job.getInstance(conf1,"Count");
-        MultipleInputs.addInputPath(job, new Path(path1Gram), TextInputFormat.class,
+        Job job1 = Job.getInstance(conf1,"Count");
+        MultipleInputs.addInputPath(job1, new Path(path1Gram), TextInputFormat.class,
                 Step1Grams.MapperClass1Gram.class);
-        MultipleInputs.addInputPath(job, new Path(path2Gram), TextInputFormat.class,
+        MultipleInputs.addInputPath(job1, new Path(path2Gram), TextInputFormat.class,
                 Step1Grams.MapperClass2Gram.class);
-        job.setJarByClass(Step1Grams.class);
-        job.setPartitionerClass(Step1Grams.PartitionerClass.class);
-        job.setReducerClass(Step1Grams.ReducerClass.class);
-        job.setMapOutputKeyClass(Text.class);
-        job.setMapOutputValueClass(Text.class);
-        job.setOutputKeyClass(Text.class);
-        job.setOutputValueClass(Text.class);
-        FileOutputFormat.setOutputPath(job, new Path(output1));
-        job.setOutputFormatClass(TextOutputFormat.class);
-        if(job.waitForCompletion(true)) {
+        job1.setJarByClass(Step1Grams.class);
+        job1.setPartitionerClass(Step1Grams.PartitionerClass.class);
+        job1.setReducerClass(Step1Grams.ReducerClass.class);
+        job1.setMapOutputKeyClass(Text.class);
+        job1.setMapOutputValueClass(Text.class);
+        job1.setOutputKeyClass(Text.class);
+        job1.setOutputValueClass(Text.class);
+        FileOutputFormat.setOutputPath(job1, new Path(output1));
+        job1.setOutputFormatClass(TextOutputFormat.class);
+        if(job1.waitForCompletion(true)) {
             System.out.println("Step 1 finished");
         }
         else{
             System.out.println("Step 1 failed ");
         }
+        String data=getData(job1);
         // ------------------------- Step 2 -----------------------
         String output2 = outputPath+"Step2Output" + time+ "/";
         Configuration conf2 = new Configuration();
-        job = Job.getInstance(conf2,"Step 2 - arrange keys");
-        job.setJarByClass(Step2Arrange.class);
-        job.setMapperClass(Step2Arrange.MapperClassStep2.class);
-        job.setPartitionerClass(Step2Arrange.PartitionerClass2.class);
-        job.setReducerClass(Step2Arrange.ReducerClassStep2.class);
-        setJob(job,output1, output2);
-        if(job.waitForCompletion(true)) {
+        Job job2 = Job.getInstance(conf2,"Step 2 - arrange keys");
+        job2.setJarByClass(Step2Arrange.class);
+        job2.setMapperClass(Step2Arrange.MapperClassStep2.class);
+        job2.setPartitionerClass(Step2Arrange.PartitionerClass2.class);
+        job2.setReducerClass(Step2Arrange.ReducerClassStep2.class);
+        setJob(job2,output1, output2);
+        if(job2.waitForCompletion(true)) {
             System.out.println("Step 2 finished");
         }
         else{
@@ -89,13 +93,14 @@ public class MainPipeline {
 
         String output3 = outputPath+"Step3Output" + time+ "/";
         Configuration conf3 = new Configuration();
-        job = Job.getInstance(conf3,"Step 3 - compute log");
-        job.setJarByClass(Step3FinalFormat.class);
-        job.setMapperClass(Step3FinalFormat.MapperStep3.class);
-        job.setPartitionerClass(Step3FinalFormat.PartitionerClass3.class);
-        job.setReducerClass(Step3FinalFormat.ReducerStep3.class);
-        setJob(job,output2, output3);
-        if(job.waitForCompletion(true)) {
+        Job job3 = Job.getInstance(conf3,"Step 3 - compute log");
+        conf3.set("COUNTER_N1",data);// for gram-1
+        job3.setJarByClass(Step3FinalFormat.class);
+        job3.setMapperClass(Step3FinalFormat.MapperStep3.class);
+        job3.setPartitionerClass(Step3FinalFormat.PartitionerClass3.class);
+        job3.setReducerClass(Step3FinalFormat.ReducerStep3.class);
+        setJob(job3,output2, output3);
+        if(job3.waitForCompletion(true)) {
             System.out.println("Step 3 finished");
         }
         else{
@@ -113,6 +118,15 @@ public class MainPipeline {
         FileOutputFormat.setOutputPath(job, new Path(outputPath));
         job.setInputFormatClass(TextInputFormat.class);
         job.setOutputFormatClass(TextOutputFormat.class);
+    }
+    private static String getData(Job job) throws IOException {
+        String data="";
+        Counters counters = job.getCounters();
+        CounterGroup countersN= counters.getGroup("COUNTER_N1");
+        for (Counter counter : countersN) {
+            data+=counter.getName()+" " +counter.getValue()+'\n';
+        }
+        return data;
     }
 
 }
