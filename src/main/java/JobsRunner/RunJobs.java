@@ -13,7 +13,8 @@ import java.time.LocalDateTime;
 // hebrew 1-gram "s3://datasets.elasticmapreduce/ngrams/books/20090715/heb-all/1gram/data"
 // english 2 gram "s3://datasets.elasticmapreduce/ngrams/books/20090715/eng-us-all/2gram/data"
 // hebrew 2-gram "s3://datasets.elasticmapreduce/ngrams/books/20090715/heb-all/2gram/data"
-
+// s3://countwords192/googlebooks-eng-all-1gram-20120701-z
+// s3://countwords192/googlebooks-eng-all-2gram-20120701-za
 public class RunJobs {
     public static void main(String[] args) {
         BasicConfigurator.configure();
@@ -34,9 +35,11 @@ public class RunJobs {
                 .withHadoopJarStep(hadoopJarStep)
                 .withActionOnFailure("TERMINATE_JOB_FLOW");
 
+
         JobFlowInstancesConfig instances = new JobFlowInstancesConfig()
-                .withInstanceCount(7)
+                .withInstanceCount(8)
                 .withMasterInstanceType(InstanceType.M4Large.toString())
+
                 .withSlaveInstanceType(InstanceType.M4Large.toString())
                 .withHadoopVersion("2.7.2").withEc2KeyName("elion")
                 .withKeepJobFlowAliveWhenNoSteps(false)

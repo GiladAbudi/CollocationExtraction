@@ -91,6 +91,7 @@ public class Step1Grams {
         @Override
         public void reduce(Text key, Iterable<Text> values, Context context) throws IOException,  InterruptedException {
             String[] keySplit = key.toString().split(" ");
+//            System.out.println("-------Reducer 1 ------------- key = "+ key.toString());
             if(keySplit.length<3){
                // System.out.println("-------Reducer 1 -------------");
                 //System.out.println("key = " + key.toString());
