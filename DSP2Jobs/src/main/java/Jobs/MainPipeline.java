@@ -9,6 +9,7 @@ import org.apache.hadoop.mapreduce.Counters;
 import org.apache.hadoop.mapreduce.Job;
 import org.apache.hadoop.mapreduce.lib.input.FileInputFormat;
 import org.apache.hadoop.mapreduce.lib.input.MultipleInputs;
+import org.apache.hadoop.mapreduce.lib.input.SequenceFileInputFormat;
 import org.apache.hadoop.mapreduce.lib.input.TextInputFormat;
 import org.apache.hadoop.mapreduce.lib.output.FileOutputFormat;
 import org.apache.hadoop.mapreduce.lib.output.TextOutputFormat;
@@ -46,18 +47,32 @@ public class MainPipeline {
             "where", "whereafter", "whereas", "whereby", "wherein", "whereupon", "wherever", "whether", "which", "while", "whither",
             "who", "whoever", "whole", "whom", "whose", "why", "will", "with", "within", "without", "would", "yet", "you", "your",
             "yours", "yourself", "yourselves"));
+
+    public final static  HashSet<String> hebrewStopWords = new HashSet<>(Arrays.asList("של", "רב", "פי", "עם", "עליו", "עליהם", "על", "עד", "מן", "מכל", "מי", "מהם", "מה"
+            , "מ", "למה", "לכל", "לי", "לו", "להיות", "לה", "לא", "כן", "כמה", "כלי", "כל", "כי", "יש", "ימים", "יותר",
+            "יד", "י", "זה", "ז", "ועל", "ומי", "ולא", "וכן", "וכל", "והיא", "והוא", "ואם", "ו", "הרבה", "הנה", "היו",
+            "היה", "היא", "הזה", "הוא", "דבר", "ד", "ג", "בני", "בכל", "בו", "בה", "בא", "את", "אשר", "אם", "אלה", "אל",
+            "אך", "איש", "אין", "אחת", "אחר", "אחד", "אז", "אותו", "־", "^", "?", ";", ":", "1", ".", "-", "*", "\"","״","׳",
+            "!", "שלשה", "בעל", "פני", ")", "גדול", "שם", "עלי", "עולם", "מקום", "לעולם", "לנו", "להם", "ישראל", "יודע",
+            "זאת", "השמים", "הזאת", "הדברים", "הדבר", "הבית", "האמת", "דברי", "במקום", "בהם", "אמרו", "אינם", "אחרי",
+            "אותם", "אדם", "(", "חלק", "שני", "שכל", "שאר", "ש", "ר", "פעמים", "נעשה", "ן", "ממנו", "מלא", "מזה", "ם",
+            "לפי", "ל", "כמו", "כבר", "כ", "זו", "ומה", "ולכל", "ובין", "ואין", "הן", "היתה", "הא", "ה", "בל", "בין",
+            "בזה", "ב", "אף", "אי", "אותה", "או", "אבל", "א"));
+
     public static void main(String[] args) throws Exception {
         // ------------------------- Step 1 -----------------------
         String path1Gram = args[1];
         String path2Gram = args[2];
         String outputPath = args[3];
+        String language =args[4];
         String time = LocalDateTime.now().toString().replace(':','-');
         String output1 = outputPath + "Step1Output"+time+"/";
         Configuration conf1 = new Configuration();
+        conf1.set("language",language);
         Job job1 = Job.getInstance(conf1,"Count");
-        MultipleInputs.addInputPath(job1, new Path(path1Gram), TextInputFormat.class,
+        MultipleInputs.addInputPath(job1, new Path(path1Gram), SequenceFileInputFormat.class,
                 Step1Grams.MapperClass1Gram.class);
-        MultipleInputs.addInputPath(job1, new Path(path2Gram), TextInputFormat.class,
+        MultipleInputs.addInputPath(job1, new Path(path2Gram), SequenceFileInputFormat.class,
                 Step1Grams.MapperClass2Gram.class);
         job1.setJarByClass(Step1Grams.class);
         job1.setPartitionerClass(Step1Grams.PartitionerClass.class);
@@ -93,8 +108,8 @@ public class MainPipeline {
 
         String output3 = outputPath+"Step3Output" + time+ "/";
         Configuration conf3 = new Configuration();
-        Job job3 = Job.getInstance(conf3,"Step 3 - compute log");
         conf3.set("COUNTER_N1",data);// for gram-1
+        Job job3 = Job.getInstance(conf3,"Step 3 - compute log");
         job3.setJarByClass(Step3FinalFormat.class);
         job3.setMapperClass(Step3FinalFormat.MapperStep3.class);
         job3.setPartitionerClass(Step3FinalFormat.PartitionerClass3.class);
@@ -128,5 +143,7 @@ public class MainPipeline {
         }
         return data;
     }
+
+
 
 }

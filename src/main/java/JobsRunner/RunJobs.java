@@ -22,11 +22,12 @@ public class RunJobs {
                 .build();
 
         HadoopJarStepConfig hadoopJarStep = new HadoopJarStepConfig()
-                .withJar("s3n://countwords192/DSP2Jobs.jar") // This should be a full map reduce application.
+                .withJar("s3n://appbucket305336118/jarbacket/DSP2Jobs.jar") // This should be a full map reduce application.
                 .withMainClass("Jobs.MainPipeline")
-                .withArgs("s3://countwords192/googlebooks-eng-all-1gram-20120701-z",
-                        "s3://countwords192/googlebooks-eng-all-2gram-20120701-za",
-                        "s3://countwords192/output/");
+                .withArgs("s3://datasets.elasticmapreduce/ngrams/books/20090715/heb-all/1gram/data",
+                        "s3://datasets.elasticmapreduce/ngrams/books/20090715/heb-all/2gram/data",
+                        "s3://appbucket305336118/output/",
+                        "heb");
 
         StepConfig stepConfig = new StepConfig()
                 .withName("stepname")
@@ -37,7 +38,7 @@ public class RunJobs {
                 .withInstanceCount(7)
                 .withMasterInstanceType(InstanceType.M4Large.toString())
                 .withSlaveInstanceType(InstanceType.M4Large.toString())
-                .withHadoopVersion("2.7.2").withEc2KeyName("eilon")
+                .withHadoopVersion("2.7.2").withEc2KeyName("elion")
                 .withKeepJobFlowAliveWhenNoSteps(false)
                 .withPlacement(new PlacementType("us-east-1a"));
 
@@ -47,7 +48,7 @@ public class RunJobs {
                 .withSteps(stepConfig)
                 .withServiceRole("EMR_DefaultRole")
                 .withJobFlowRole("EMR_EC2_DefaultRole")
-                .withLogUri("s3n://countwords192/logs/")
+                .withLogUri("s3n://appbucket305336118/logs/")
                 .withReleaseLabel("emr-5.0.0");
 
 

@@ -15,12 +15,12 @@ public class Step3FinalFormat {
 
         @Override
         public void map(LongWritable lineId, Text value, Context context) throws IOException, InterruptedException {
-            System.out.println("-------- Mapper 3 - Step 3 --------");
+         //   System.out.println("-------- Mapper 3 - Step 3 --------");
             String[] split = value.toString().split("\t");
             String newKey = split[0];
             String newValue = split[1];
-            System.out.println("Mapper 3 key ------------" + newKey);
-            System.out.println("Mapper 3 value ------------" + newValue);
+        //    System.out.println("Mapper 3 key ------------" + newKey);
+       //     System.out.println("Mapper 3 value ------------" + newValue);
             context.write(new Text(newKey), new Text(newValue));
         }
 
@@ -44,10 +44,10 @@ public class Step3FinalFormat {
             String cw1 = "";
             String cw2 = "";
             String cw1w2 = "";
-            System.out.println("--------------Reducer 3 -----------------");
-            System.out.println("reducer 3  current key = " + key);
+          //  System.out.println("--------------Reducer 3 -----------------");
+           // System.out.println("reducer 3  current key = " + key);
             for (Text value : values) {
-                System.out.println("reducer 3 current value = " + value);
+             //   System.out.println("reducer 3 current value = " + value);
                 String[] valueSplit = value.toString().split(" ");
                 if (valueSplit.length < 2) {
                     cw1w2 = value.toString();
@@ -73,18 +73,18 @@ public class Step3FinalFormat {
             String[] keySplit = key.toString().split(" ");
             String decade = keySplit[2];
             long N = context.getCounter("COUNTER_N1",decade).getValue();
-            System.out.println("Current N for " +decade+" is : " +N);
+        //    System.out.println("Current N for " +decade+" is : " +N);
             String finalResult = Step3FinalFormat.logLikelihood(Double.parseDouble(cw1), Double.parseDouble(cw2), Double.parseDouble(cw1w2),(double) N);
-            System.out.println("Reducer 3 writes to context key: " + key + " Value: " + finalResult);
+          //  System.out.println("Reducer 3 writes to context key: " + key + " Value: " + finalResult);
             context.write(key, new Text(finalResult));
         }
 
     }
 
-    public static class PartitionerClass3 extends Partitioner<Text, IntWritable> {
+    public static class PartitionerClass3 extends Partitioner<Text, Text> {
         @Override
-        public int getPartition(Text key, IntWritable value, int numPartitions) {
-            return key.hashCode() % numPartitions;
+        public int getPartition(Text key, Text value, int numPartitions) {
+            return Math.abs(key.hashCode() % numPartitions);
         }
     }
 
