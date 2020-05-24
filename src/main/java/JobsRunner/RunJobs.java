@@ -21,14 +21,24 @@ public class RunJobs {
         final AmazonElasticMapReduce emr = AmazonElasticMapReduceClient.builder()
                 .withRegion(Regions.US_EAST_1)
                 .build();
-
-        HadoopJarStepConfig hadoopJarStep = new HadoopJarStepConfig()
-                .withJar("s3n://appbucket305336118/jarbacket/DSP2Jobs.jar") // This should be a full map reduce application.
-                .withMainClass("Jobs.MainPipeline")
-                .withArgs("s3://datasets.elasticmapreduce/ngrams/books/20090715/heb-all/1gram/data",
-                        "s3://datasets.elasticmapreduce/ngrams/books/20090715/heb-all/2gram/data",
-                        "s3://appbucket305336118/output/",
-                        "heb");
+        HadoopJarStepConfig hadoopJarStep;
+        //if (args[2].equals("heb")) {
+             hadoopJarStep = new HadoopJarStepConfig()
+                    .withJar("s3n://appbucket305336118/jarbacket/DSP2Jobs.jar") // This should be a full map reduce application.
+                    .withMainClass("Jobs.MainPipeline")
+                    .withArgs("s3://datasets.elasticmapreduce/ngrams/books/20090715/heb-all/1gram/data",
+                            "s3://datasets.elasticmapreduce/ngrams/books/20090715/heb-all/2gram/data",
+                            "s3://appbucket305336118/output/",
+                            "heb");
+        //}else if (args[2].equals("eng")){
+          /*   hadoopJarStep = new HadoopJarStepConfig()
+                    .withJar("s3n://appbucket305336118/jarbacket/DSP2Jobs.jar") // This should be a full map reduce application.
+                    .withMainClass("Jobs.MainPipeline")
+                    .withArgs("s3://datasets.elasticmapreduce/ngrams/books/20090715/eng-us-all/1gram/data",
+                            "s3://datasets.elasticmapreduce/ngrams/books/20090715/eng-us-all/2gram/data",
+                            "s3://appbucket305336118/output/",
+                            "heb");*/
+        //}else return;
 
         StepConfig stepConfig = new StepConfig()
                 .withName("stepname")

@@ -86,7 +86,7 @@ public class Step3FinalFormat {
     public static class PartitionerClass3 extends Partitioner<Text, Text> {
         @Override
         public int getPartition(Text key, Text value, int numPartitions) {
-            return Math.abs(key.hashCode() % numPartitions);
+            return (key.hashCode() & Integer.MAX_VALUE) % numPartitions;
         }
     }
 

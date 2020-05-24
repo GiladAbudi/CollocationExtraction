@@ -82,7 +82,7 @@ public class Step2Arrange {
     public static class PartitionerClass2 extends Partitioner<Text, Text> {
         @Override
         public int getPartition(Text key, Text value, int numPartitions) {
-            return Math.abs(key.hashCode() % numPartitions);
+            return (key.hashCode() & Integer.MAX_VALUE) % numPartitions;
         }
     }
 

@@ -67,87 +67,20 @@ public class MainPipeline {
         String outputPath = args[3];
         String language =args[4];
         String time = LocalDateTime.now().toString().replace(':','-');
-//        String output1 = outputPath + "Step1Output"+time+"/";
-//        Configuration conf1 = new Configuration();
-//        conf1.set("mapreduce.map.java.opts","-Xmx512m");
-//        conf1.set("mapreduce.reduce.java.opts","-Xmx1536m");
-//        conf1.set("mapreduce.map.memory.mb","768");
-//        conf1.set("mapreduce.reduce.memory.mb","2048");
-//        conf1.set("yarn.app.mapreduce.am.resource.mb","2048");
-//
-//        conf1.set("yarn.scheduler.minimum-allocation-mb","256");
-//        conf1.set("yarn.scheduler.maximum-allocation-mb","12288");
-//        conf1.set("yarn.nodemanager.resource.memory-mb","12288");
-//        conf1.set("mapreduce.reduce.shuffle.memory.limit.percent","0.5");
-//
-//        Job job1 = Job.getInstance(conf1,"Count");
-//        MultipleInputs.addInputPath(job1, new Path(path1Gram), SequenceFileInputFormat.class,
-//                Step1Grams.MapperClass1Gram.class);
-//        MultipleInputs.addInputPath(job1, new Path(path2Gram), SequenceFileInputFormat.class,
-//                Step1Grams.MapperClass2Gram.class);
-//        job1.setJarByClass(Step1Grams.class);
-//        job1.setPartitionerClass(Step1Grams.PartitionerClass.class);
-//        job1.setReducerClass(Step1Grams.ReducerClass.class);
-//        job1.setMapOutputKeyClass(Text.class);
-//        job1.setMapOutputValueClass(Text.class);
-//        job1.setOutputKeyClass(Text.class);
-//        job1.setOutputValueClass(Text.class);
-//        FileOutputFormat.setOutputPath(job1, new Path(output1));
-//        job1.setOutputFormatClass(TextOutputFormat.class);
-//        if(job1.waitForCompletion(true)) {
-//            System.out.println("Step 1 finished");
-//        }
-//        else{
-//            System.out.println("Step 1 failed ");
-//        }
-//        String data=getData(job1);
-//        // ------------------------- Step 2 -----------------------
-//        String output2 = outputPath+"Step2Output" + time+ "/";
-//        Configuration conf2 = new Configuration();
-//        Job job2 = Job.getInstance(conf2,"Step 2 - arrange keys");
-//        job2.setJarByClass(Step2Arrange.class);
-//        job2.setMapperClass(Step2Arrange.MapperClassStep2.class);
-//        job2.setPartitionerClass(Step2Arrange.PartitionerClass2.class);
-//        job2.setReducerClass(Step2Arrange.ReducerClassStep2.class);
-//        setJob(job2,output1, output2);
-//        if(job2.waitForCompletion(true)) {
-//            System.out.println("Step 2 finished");
-//        }
-//        else{
-//            System.out.println("Step 2 failed ");
-//        }
-//
-//        String output3 = outputPath+"Step3Output" + time+ "/";
-//        Configuration conf3 = new Configuration();
-//        conf3.set("COUNTER_N1",data);// for gram-1
-//        Job job3 = Job.getInstance(conf3,"Step 3 - compute log");
-//        job3.setJarByClass(Step3FinalFormat.class);
-//        job3.setMapperClass(Step3FinalFormat.MapperStep3.class);
-//        job3.setPartitionerClass(Step3FinalFormat.PartitionerClass3.class);
-//        job3.setReducerClass(Step3FinalFormat.ReducerStep3.class);
-//        setJob(job3,output2, output3);
-//        if(job3.waitForCompletion(true)) {
-//            System.out.println("Step 3 finished");
-//        }
-//        else{
-//            System.out.println("Step 3 failed ");
-//        }
-        String output4 = outputPath+"Step4Output" + time+ "/";
-        String input4 = outputPath + "Step3Output2020-05-23T12-49-10.856/";
-        Configuration conf4 = new Configuration();
-        Job job4 = Job.getInstance(conf4,"Step 4 - display results");
-        job4.setJarByClass(Step4SortAndDisplay.class);
-        job4.setMapperClass(Step4SortAndDisplay.MapperClassStep4.class);
-        job4.setPartitionerClass(Step4SortAndDisplay.PartitionerClass4.class);
-        job4.setReducerClass(Step4SortAndDisplay.ReducerStep3.class);
-        setJob(job4,input4, output4);
-        job4.setMapOutputKeyClass(ComparableKey.class);
-        job4.setMapOutputValueClass(Text.class);
-        if(job4.waitForCompletion(true)) {
-            System.out.println("Work Complete!");
         String output1 = outputPath + "Step1Output"+time+"/";
         Configuration conf1 = new Configuration();
         conf1.set("language",language);
+        conf1.set("mapreduce.map.java.opts","-Xmx512m");
+        conf1.set("mapreduce.reduce.java.opts","-Xmx1536m");
+        conf1.set("mapreduce.map.memory.mb","768");
+        conf1.set("mapreduce.reduce.memory.mb","2048");
+        conf1.set("yarn.app.mapreduce.am.resource.mb","2048");
+
+        conf1.set("yarn.scheduler.minimum-allocation-mb","256");
+        conf1.set("yarn.scheduler.maximum-allocation-mb","12288");
+        conf1.set("yarn.nodemanager.resource.memory-mb","12288");
+        conf1.set("mapreduce.reduce.shuffle.memory.limit.percent","0.5");
+
         Job job1 = Job.getInstance(conf1,"Count");
         MultipleInputs.addInputPath(job1, new Path(path1Gram), SequenceFileInputFormat.class,
                 Step1Grams.MapperClass1Gram.class);
@@ -166,7 +99,7 @@ public class MainPipeline {
             System.out.println("Step 1 finished");
         }
         else{
-            System.out.println("Step 4 failed");
+            System.out.println("Step 1 failed ");
         }
         String data=getData(job1);
         // ------------------------- Step 2 -----------------------
@@ -199,6 +132,22 @@ public class MainPipeline {
         }
         else{
             System.out.println("Step 3 failed ");
+        }
+        String output4 = outputPath+"Step4Output" + time+ "/";
+        Configuration conf4 = new Configuration();
+        Job job4 = Job.getInstance(conf4,"Step 4 - display results");
+        job4.setJarByClass(Step4SortAndDisplay.class);
+        job4.setMapperClass(Step4SortAndDisplay.MapperClassStep4.class);
+        job4.setPartitionerClass(Step4SortAndDisplay.PartitionerClass4.class);
+        job4.setReducerClass(Step4SortAndDisplay.ReducerStep3.class);
+        setJob(job4,output3, output4);
+        job4.setMapOutputKeyClass(ComparableKey.class);
+        job4.setMapOutputValueClass(Text.class);
+        if(job4.waitForCompletion(true)) {
+            System.out.println("Work Complete!");
+        }
+        else{
+            System.out.println("Step 4 failed");
         }
 
     }
