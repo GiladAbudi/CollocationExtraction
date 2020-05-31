@@ -23,21 +23,21 @@ public class RunJobs {
                 .build();
         HadoopJarStepConfig hadoopJarStep;
         //if (args[2].equals("heb")) {
-             hadoopJarStep = new HadoopJarStepConfig()
-                    .withJar("s3n://appbucket305336118/jarbacket/DSP2Jobs.jar") // This should be a full map reduce application.
+           /*  hadoopJarStep = new HadoopJarStepConfig()
+                    .withJar("s3n://appbucket305336118/jarbacket/DSP2Jobs2.jar") // This should be a full map reduce application.
                     .withMainClass("Jobs.MainPipeline")
                     .withArgs("s3://datasets.elasticmapreduce/ngrams/books/20090715/heb-all/1gram/data",
                             "s3://datasets.elasticmapreduce/ngrams/books/20090715/heb-all/2gram/data",
                             "s3://appbucket305336118/output/",
-                            "heb");
+                            "heb");*/
         //}else if (args[2].equals("eng")){
-          /*   hadoopJarStep = new HadoopJarStepConfig()
-                    .withJar("s3n://appbucket305336118/jarbacket/DSP2Jobs.jar") // This should be a full map reduce application.
+             hadoopJarStep = new HadoopJarStepConfig()
+                    .withJar("s3n://appbucket305336118/jarbacket/DSP2Jobs2.jar") // This should be a full map reduce application.
                     .withMainClass("Jobs.MainPipeline")
                     .withArgs("s3://datasets.elasticmapreduce/ngrams/books/20090715/eng-us-all/1gram/data",
                             "s3://datasets.elasticmapreduce/ngrams/books/20090715/eng-us-all/2gram/data",
                             "s3://appbucket305336118/output/",
-                            "heb");*/
+                            "eng");
         //}else return;
 
         StepConfig stepConfig = new StepConfig()

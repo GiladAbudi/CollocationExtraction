@@ -88,6 +88,7 @@ public class MainPipeline {
                 Step1Grams.MapperClass2Gram.class);
         job1.setJarByClass(Step1Grams.class);
         job1.setPartitionerClass(Step1Grams.PartitionerClass.class);
+        job1.setCombinerClass(Step1Grams.CombinerClass.class);
         job1.setReducerClass(Step1Grams.ReducerClass.class);
         job1.setMapOutputKeyClass(Text.class);
         job1.setMapOutputValueClass(Text.class);

@@ -105,6 +105,30 @@ public class Step1Grams {
         }
     }
 
+    public static class CombinerClass extends Reducer<Text,Text,Text,Text> {
+        @Override
+        public void reduce(Text key, Iterable<Text> values, Context context) throws IOException,  InterruptedException {
+            String[] keySplit = key.toString().split(" ");
+            if(keySplit.length<3){
+                long sum = 0;
+                for (Text value : values) {
+                    sum += Long.parseLong(value.toString());
+                }
+                //context.getCounter("COUNTER_N1",keySplit[1]).increment(sum);
+                context.write(key,new Text(""+sum)); // <word decade,occurrences>
+            }
+            else{
+                long sum = 0;
+                for (Text value : values) {
+                    sum += Long.parseLong(value.toString());
+                }
+                context.write(key,new Text(""+sum));
+            }
+        }
+    }
+
+
+
     public static class PartitionerClass extends Partitioner<Text, Text> {
         @Override
         public int getPartition(Text key, Text value, int numPartitions) {
