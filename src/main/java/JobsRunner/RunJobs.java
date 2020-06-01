@@ -21,13 +21,24 @@ public class RunJobs {
         final AmazonElasticMapReduce emr = AmazonElasticMapReduceClient.builder()
                 .withRegion(Regions.US_EAST_1)
                 .build();
-
-        HadoopJarStepConfig hadoopJarStep = new HadoopJarStepConfig()
-                .withJar("s3n://countwords192/DSP2Jobs.jar") // This should be a full map reduce application.
-                .withMainClass("Jobs.MainPipeline")
-                .withArgs("s3://datasets.elasticmapreduce/ngrams/books/20090715/eng-us-all/1gram/data",
-                        "s3://datasets.elasticmapreduce/ngrams/books/20090715/eng-us-all/2gram/data",
-                        "s3://countwords192/output/");
+        HadoopJarStepConfig hadoopJarStep;
+        if (args[1].equals("heb")) {
+             hadoopJarStep = new HadoopJarStepConfig()
+                    .withJar("s3n://appbucket305336118/jarbacket/DSP2Jobs.jar") // This should be a full map reduce application.
+                    .withMainClass("Jobs.MainPipeline")
+                    .withArgs("s3://datasets.elasticmapreduce/ngrams/books/20090715/heb-all/1gram/data",
+                            "s3://datasets.elasticmapreduce/ngrams/books/20090715/heb-all/2gram/data",
+                            "s3://appbucket305336118/output/",
+                            "heb");
+        }else if (args[1].equals("eng")){
+             hadoopJarStep = new HadoopJarStepConfig()
+                    .withJar("s3n://appbucket305336118/jarbacket/DSP2Jobs.jar") // This should be a full map reduce application.
+                    .withMainClass("Jobs.MainPipeline")
+                    .withArgs("s3://datasets.elasticmapreduce/ngrams/books/20090715/eng-us-all/1gram/data",
+                            "s3://datasets.elasticmapreduce/ngrams/books/20090715/eng-us-all/2gram/data",
+                            "s3://appbucket305336118/output/",
+                            "eng");
+        }else return;
 
         StepConfig stepConfig = new StepConfig()
                 .withName("stepname")
@@ -40,7 +51,7 @@ public class RunJobs {
                 .withMasterInstanceType(InstanceType.M4Large.toString())
 
                 .withSlaveInstanceType(InstanceType.M4Large.toString())
-                .withHadoopVersion("2.7.2").withEc2KeyName("eilon")
+                .withHadoopVersion("2.7.2").withEc2KeyName("elion")
                 .withKeepJobFlowAliveWhenNoSteps(false)
                 .withPlacement(new PlacementType("us-east-1a"));
 
@@ -50,7 +61,7 @@ public class RunJobs {
                 .withSteps(stepConfig)
                 .withServiceRole("EMR_DefaultRole")
                 .withJobFlowRole("EMR_EC2_DefaultRole")
-                .withLogUri("s3n://countwords192/logs/")
+                .withLogUri("s3n://appbucket305336118/logs/")
                 .withReleaseLabel("emr-5.0.0");
 
 

@@ -1,58 +1,87 @@
 package Jobs;
 
-import java.io.IOException;
-import java.util.ArrayList;
-import java.util.Arrays;
-
-
-import org.apache.hadoop.io.IntWritable;
+import org.apache.hadoop.conf.Configuration;
 import org.apache.hadoop.io.LongWritable;
-import org.apache.hadoop.io.MapWritable;
 import org.apache.hadoop.io.Text;
 import org.apache.hadoop.mapreduce.Mapper;
 import org.apache.hadoop.mapreduce.Partitioner;
 import org.apache.hadoop.mapreduce.Reducer;
-import sun.tools.jar.Main;
+
+import java.io.IOException;
+import java.util.regex.Matcher;
+import java.util.regex.Pattern;
 
 public class Step1Grams {
 
     public static class MapperClass1Gram extends Mapper<LongWritable, Text, Text, Text> {
 
-        @Override
-        public void map(LongWritable lineId, Text line, Context context) throws IOException,  InterruptedException {
-//            System.out.println("---------------Mapper 1.1 - 1Gram------------------");
-//            System.out.println("Line = " +line);
-            String[] splitted = line.toString().split("\t");
-            Text key = new Text(splitted[0]+" "+getDecade(splitted[1]));
-//            System.out.println("key = " + key);
+        private static Pattern HEBREW_PATTERN = Pattern.compile("[\\p{InHebrew}]+",Pattern.UNICODE_CASE);
+        private String language;
 
-            if(!MainPipeline.stopWords.contains(splitted[0])) {
-                context.write(key, new Text(splitted[2])); // <word decade, occur>
+        @Override
+        public void setup(Context context) throws IOException, InterruptedException {
+            Configuration c = context.getConfiguration();
+            language = c.get("language");
+        }
+
+        @Override
+        public void map(LongWritable lineId, Text line, Context context) throws IOException, InterruptedException {
+            String[] splitted = line.toString().split("\t");
+            if (language.equals("heb") ) {
+                Matcher m = HEBREW_PATTERN.matcher(splitted[0]);
+                if (m.matches()) {
+                    Text key = new Text(splitted[0] + " " + getDecade(splitted[1]));
+                    if (!MainPipeline.hebrewStopWords.contains(splitted[0])) {
+                        context.write(key, new Text(splitted[2])); // <word decade, occur>
+                    }
+                }
+            } else if (language.equals("eng")) {
+                Text key = new Text(splitted[0] + " " + getDecade(splitted[1]));
+                if (!MainPipeline.stopWords.contains(splitted[0])) {
+                    context.write(key, new Text(splitted[2])); // <word decade, occur>
+                }
             }
         }
     }
+
+
     public static class MapperClass2Gram extends Mapper<LongWritable, Text, Text, Text> {
+        private  String language;
+        private static Pattern HEBREW_PATTERN = Pattern.compile("[\\p{InHebrew}]+",Pattern.UNICODE_CASE);
+
+        @Override
+        public void setup(Context context) throws IOException, InterruptedException {
+            Configuration c = context.getConfiguration();
+            language = c.get("language");
+        }
+
         // in - 2-gram. out - (w1 w2 decade,c1c2)
         @Override
         public void map(LongWritable lineId, Text line, Context context) throws IOException,  InterruptedException {
-//            System.out.println("--------------Mapper 1.2 - 2Gram----------------\n Line = " + line);
             String[] splitted = line.toString().split("\t");
             String[] bigram = splitted[0].split(" ");
-            if (bigram.length >= 2) {
-                Text key = new Text(bigram[0] + " " + bigram[1] + " " + getDecade(splitted[1]));
-//                System.out.println("key = " + key);
 
+            if (language.equals("heb") && bigram.length==2) {
+                Matcher m = HEBREW_PATTERN.matcher(bigram[0]+bigram[1]);
+                if (m.matches()) {
+                    Text key = new Text(bigram[0] + " " + bigram[1] + " " + getDecade(splitted[1]));
+                    if (!MainPipeline.hebrewStopWords.contains(bigram[0]) && !MainPipeline.hebrewStopWords.contains(bigram[1])) {
+                        context.write(key, new Text(splitted[2]));
+                    }
+                }
+            }else if(language.equals("eng") && bigram.length==2){
+                Text key = new Text(bigram[0] + " " + bigram[1] + " " + getDecade(splitted[1]));
                 if (!MainPipeline.stopWords.contains(bigram[0]) && !MainPipeline.stopWords.contains(bigram[1])) {
                     context.write(key, new Text(splitted[2]));
                 }
             }
         }
+
     }
     public static class ReducerClass extends Reducer<Text,Text,Text,Text> {
         @Override
         public void reduce(Text key, Iterable<Text> values, Context context) throws IOException,  InterruptedException {
             String[] keySplit = key.toString().split(" ");
-//            System.out.println("-------Reducer 1 ------------- key = "+ key.toString());
             if(keySplit.length<3){
                 long sum = 0;
                 for (Text value : values) {
@@ -76,6 +105,30 @@ public class Step1Grams {
         }
     }
 
+    public static class CombinerClass extends Reducer<Text,Text,Text,Text> {
+        @Override
+        public void reduce(Text key, Iterable<Text> values, Context context) throws IOException,  InterruptedException {
+            String[] keySplit = key.toString().split(" ");
+            if(keySplit.length<3){
+                long sum = 0;
+                for (Text value : values) {
+                    sum += Long.parseLong(value.toString());
+                }
+                //context.getCounter("COUNTER_N1",keySplit[1]).increment(sum);
+                context.write(key,new Text(""+sum)); // <word decade,occurrences>
+            }
+            else{
+                long sum = 0;
+                for (Text value : values) {
+                    sum += Long.parseLong(value.toString());
+                }
+                context.write(key,new Text(""+sum));
+            }
+        }
+    }
+
+
+
     public static class PartitionerClass extends Partitioner<Text, Text> {
         @Override
         public int getPartition(Text key, Text value, int numPartitions) {
@@ -90,3 +143,4 @@ public class Step1Grams {
     public static void main(String[] args) throws Exception {
     }
 }
+

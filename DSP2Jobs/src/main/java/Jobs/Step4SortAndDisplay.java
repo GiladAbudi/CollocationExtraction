@@ -54,7 +54,7 @@ public class Step4SortAndDisplay {
     public static class PartitionerClass4 extends Partitioner<ComparableKey, Text> {
         @Override
         public int getPartition(ComparableKey key, Text value, int numPartitions) {
-            return (value.hashCode() & Integer.MAX_VALUE) % numPartitions;
+            return Integer.parseInt(String.valueOf(key.getDecade().toString().charAt(2))) % numPartitions;
         }
     }
 

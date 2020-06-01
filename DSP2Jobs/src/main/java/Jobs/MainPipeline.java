@@ -48,86 +48,100 @@ public class MainPipeline {
             "where", "whereafter", "whereas", "whereby", "wherein", "whereupon", "wherever", "whether", "which", "while", "whither",
             "who", "whoever", "whole", "whom", "whose", "why", "will", "with", "within", "without", "would", "yet", "you", "your",
             "yours", "yourself", "yourselves"));
+
+    public final static  HashSet<String> hebrewStopWords = new HashSet<>(Arrays.asList("של", "רב", "פי", "עם", "עליו", "עליהם", "על", "עד", "מן", "מכל", "מי", "מהם", "מה"
+            , "מ", "למה", "לכל", "לי", "לו", "להיות", "לה", "לא", "כן", "כמה", "כלי", "כל", "כי", "יש", "ימים", "יותר",
+            "יד", "י", "זה", "ז", "ועל", "ומי", "ולא", "וכן", "וכל", "והיא", "והוא", "ואם", "ו", "הרבה", "הנה", "היו",
+            "היה", "היא", "הזה", "הוא", "דבר", "ד", "ג", "בני", "בכל", "בו", "בה", "בא", "את", "אשר", "אם", "אלה", "אל",
+            "אך", "איש", "אין", "אחת", "אחר", "אחד", "אז", "אותו", "־", "^", "?", ";", ":", "1", ".", "-", "*", "\"","״","׳",
+            "!", "שלשה", "בעל", "פני", ")", "גדול", "שם", "עלי", "עולם", "מקום", "לעולם", "לנו", "להם", "ישראל", "יודע",
+            "זאת", "השמים", "הזאת", "הדברים", "הדבר", "הבית", "האמת", "דברי", "במקום", "בהם", "אמרו", "אינם", "אחרי",
+            "אותם", "אדם", "(", "חלק", "שני", "שכל", "שאר", "ש", "ר", "פעמים", "נעשה", "ן", "ממנו", "מלא", "מזה", "ם",
+            "לפי", "ל", "כמו", "כבר", "כ", "זו", "ומה", "ולכל", "ובין", "ואין", "הן", "היתה", "הא", "ה", "בל", "בין",
+            "בזה", "ב", "אף", "אי", "אותה", "או", "אבל", "א"));
+
     public static void main(String[] args) throws Exception {
         // ------------------------- Step 1 -----------------------
         String path1Gram = args[1];
         String path2Gram = args[2];
         String outputPath = args[3];
+        String language =args[4];
         String time = LocalDateTime.now().toString().replace(':','-');
-//        String output1 = outputPath + "Step1Output"+time+"/";
-//        Configuration conf1 = new Configuration();
-//        conf1.set("mapreduce.map.java.opts","-Xmx512m");
-//        conf1.set("mapreduce.reduce.java.opts","-Xmx1536m");
-//        conf1.set("mapreduce.map.memory.mb","768");
-//        conf1.set("mapreduce.reduce.memory.mb","2048");
-//        conf1.set("yarn.app.mapreduce.am.resource.mb","2048");
-//
-//        conf1.set("yarn.scheduler.minimum-allocation-mb","256");
-//        conf1.set("yarn.scheduler.maximum-allocation-mb","12288");
-//        conf1.set("yarn.nodemanager.resource.memory-mb","12288");
-//        conf1.set("mapreduce.reduce.shuffle.memory.limit.percent","0.5");
-//
-//        Job job1 = Job.getInstance(conf1,"Count");
-//        MultipleInputs.addInputPath(job1, new Path(path1Gram), SequenceFileInputFormat.class,
-//                Step1Grams.MapperClass1Gram.class);
-//        MultipleInputs.addInputPath(job1, new Path(path2Gram), SequenceFileInputFormat.class,
-//                Step1Grams.MapperClass2Gram.class);
-//        job1.setJarByClass(Step1Grams.class);
-//        job1.setPartitionerClass(Step1Grams.PartitionerClass.class);
-//        job1.setReducerClass(Step1Grams.ReducerClass.class);
-//        job1.setMapOutputKeyClass(Text.class);
-//        job1.setMapOutputValueClass(Text.class);
-//        job1.setOutputKeyClass(Text.class);
-//        job1.setOutputValueClass(Text.class);
-//        FileOutputFormat.setOutputPath(job1, new Path(output1));
-//        job1.setOutputFormatClass(TextOutputFormat.class);
-//        if(job1.waitForCompletion(true)) {
-//            System.out.println("Step 1 finished");
-//        }
-//        else{
-//            System.out.println("Step 1 failed ");
-//        }
-//        String data=getData(job1);
-//        // ------------------------- Step 2 -----------------------
-//        String output2 = outputPath+"Step2Output" + time+ "/";
-//        Configuration conf2 = new Configuration();
-//        Job job2 = Job.getInstance(conf2,"Step 2 - arrange keys");
-//        job2.setJarByClass(Step2Arrange.class);
-//        job2.setMapperClass(Step2Arrange.MapperClassStep2.class);
-//        job2.setPartitionerClass(Step2Arrange.PartitionerClass2.class);
-//        job2.setReducerClass(Step2Arrange.ReducerClassStep2.class);
-//        setJob(job2,output1, output2);
-//        if(job2.waitForCompletion(true)) {
-//            System.out.println("Step 2 finished");
-//        }
-//        else{
-//            System.out.println("Step 2 failed ");
-//        }
-//
-//        String output3 = outputPath+"Step3Output" + time+ "/";
-//        Configuration conf3 = new Configuration();
-//        conf3.set("COUNTER_N1",data);// for gram-1
-//        Job job3 = Job.getInstance(conf3,"Step 3 - compute log");
-//        job3.setJarByClass(Step3FinalFormat.class);
-//        job3.setMapperClass(Step3FinalFormat.MapperStep3.class);
-//        job3.setPartitionerClass(Step3FinalFormat.PartitionerClass3.class);
-//        job3.setReducerClass(Step3FinalFormat.ReducerStep3.class);
-//        setJob(job3,output2, output3);
-//        if(job3.waitForCompletion(true)) {
-//            System.out.println("Step 3 finished");
-//        }
-//        else{
-//            System.out.println("Step 3 failed ");
-//        }
+        String output1 = outputPath + "Step1Output"+time+"/";
+        Configuration conf1 = new Configuration();
+        conf1.set("language",language);
+        conf1.set("mapreduce.map.java.opts","-Xmx512m");
+        conf1.set("mapreduce.reduce.java.opts","-Xmx1536m");
+        conf1.set("mapreduce.map.memory.mb","768");
+        conf1.set("mapreduce.reduce.memory.mb","2048");
+        conf1.set("yarn.app.mapreduce.am.resource.mb","2048");
+
+        conf1.set("yarn.scheduler.minimum-allocation-mb","256");
+        conf1.set("yarn.scheduler.maximum-allocation-mb","12288");
+        conf1.set("yarn.nodemanager.resource.memory-mb","12288");
+        conf1.set("mapreduce.reduce.shuffle.memory.limit.percent","0.5");
+
+        Job job1 = Job.getInstance(conf1,"Count");
+        MultipleInputs.addInputPath(job1, new Path(path1Gram), SequenceFileInputFormat.class,
+                Step1Grams.MapperClass1Gram.class);
+        MultipleInputs.addInputPath(job1, new Path(path2Gram), SequenceFileInputFormat.class,
+                Step1Grams.MapperClass2Gram.class);
+        job1.setJarByClass(Step1Grams.class);
+        job1.setPartitionerClass(Step1Grams.PartitionerClass.class);
+        job1.setCombinerClass(Step1Grams.CombinerClass.class);
+        job1.setReducerClass(Step1Grams.ReducerClass.class);
+        job1.setMapOutputKeyClass(Text.class);
+        job1.setMapOutputValueClass(Text.class);
+        job1.setOutputKeyClass(Text.class);
+        job1.setOutputValueClass(Text.class);
+        FileOutputFormat.setOutputPath(job1, new Path(output1));
+        job1.setOutputFormatClass(TextOutputFormat.class);
+        if(job1.waitForCompletion(true)) {
+            System.out.println("Step 1 finished");
+        }
+        else{
+            System.out.println("Step 1 failed ");
+        }
+        String data=getData(job1);
+        // ------------------------- Step 2 -----------------------
+        String output2 = outputPath+"Step2Output" + time+ "/";
+        Configuration conf2 = new Configuration();
+        Job job2 = Job.getInstance(conf2,"Step 2 - arrange keys");
+        job2.setJarByClass(Step2Arrange.class);
+        job2.setMapperClass(Step2Arrange.MapperClassStep2.class);
+        job2.setPartitionerClass(Step2Arrange.PartitionerClass2.class);
+        job2.setReducerClass(Step2Arrange.ReducerClassStep2.class);
+        setJob(job2,output1, output2);
+        if(job2.waitForCompletion(true)) {
+            System.out.println("Step 2 finished");
+        }
+        else{
+            System.out.println("Step 2 failed ");
+        }
+
+        String output3 = outputPath+"Step3Output" + time+ "/";
+        Configuration conf3 = new Configuration();
+        conf3.set("COUNTER_N1",data);// for gram-1
+        Job job3 = Job.getInstance(conf3,"Step 3 - compute log");
+        job3.setJarByClass(Step3FinalFormat.class);
+        job3.setMapperClass(Step3FinalFormat.MapperStep3.class);
+        job3.setPartitionerClass(Step3FinalFormat.PartitionerClass3.class);
+        job3.setReducerClass(Step3FinalFormat.ReducerStep3.class);
+        setJob(job3,output2, output3);
+        if(job3.waitForCompletion(true)) {
+            System.out.println("Step 3 finished");
+        }
+        else{
+            System.out.println("Step 3 failed ");
+        }
         String output4 = outputPath+"Step4Output" + time+ "/";
-        String input4 = outputPath + "Step3Output2020-05-23T12-49-10.856/";
         Configuration conf4 = new Configuration();
         Job job4 = Job.getInstance(conf4,"Step 4 - display results");
         job4.setJarByClass(Step4SortAndDisplay.class);
         job4.setMapperClass(Step4SortAndDisplay.MapperClassStep4.class);
         job4.setPartitionerClass(Step4SortAndDisplay.PartitionerClass4.class);
         job4.setReducerClass(Step4SortAndDisplay.ReducerStep3.class);
-        setJob(job4,input4, output4);
+        setJob(job4,output3, output4);
         job4.setMapOutputKeyClass(ComparableKey.class);
         job4.setMapOutputValueClass(Text.class);
         if(job4.waitForCompletion(true)) {
@@ -136,6 +150,7 @@ public class MainPipeline {
         else{
             System.out.println("Step 4 failed");
         }
+
     }
 
     private static void setJob(Job job,String inputPath, String outputPath) throws IOException {
@@ -157,5 +172,7 @@ public class MainPipeline {
         }
         return data;
     }
+
+
 
 }

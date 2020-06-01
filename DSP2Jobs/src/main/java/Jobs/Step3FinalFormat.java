@@ -95,7 +95,7 @@ public class Step3FinalFormat {
         double p1 = c12 / c1;
         double p2 = (c2 - c12) / (N - c1);
         double result = logL(c12, c1, p) + logL(c2 - c12, N - c1, p) - logL(c12, c1, p1) - logL(c2 - c12, N - c1, p2);
-        return String.valueOf(result);
+        return String.valueOf(result*-2) ;
     }
 
     private static double logL(double k, double n, double x) {
