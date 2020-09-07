@@ -6,3 +6,5 @@ with their log likelihood ratios (in descending order).
 Collocation is a sequence of words that co-occur more often than would be expected by chance.
 
 In this program, we will use log likelihood ratio in order to determine whether a given pair of ordered words is a collocation.
+
+Using: Hadoop - Amazon Elastic Map Reduce.
